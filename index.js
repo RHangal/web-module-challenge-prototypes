@@ -15,11 +15,26 @@
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
-
-
+Person.prototype.eat = function(someFood){
+  if(this.stomach.length < 10) {
+    this.stomach.push(someFood);
+    return `${this.name} just ate a ${someFood}.`
+  } else {return `too much food, gotta poop first`}
+}
+Person.prototype.poop = function() {
+  this.stomach = [];
+  return `${this.name} just pooped, and their stomach is empty.`
+}
+const person1 = new Person('Rohan', 28)
+console.log(person1.eat('burger'));
+console.log(person1);
+console.log(person1.poop());
+console.log(person1);
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
