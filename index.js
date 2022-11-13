@@ -30,11 +30,15 @@ Person.prototype.poop = function() {
   this.stomach = [];
   return `${this.name} just pooped, and their stomach is empty.`
 }
+Person.prototype.toString = function() {
+  return `${this.name}, ${this.age}`;
+}
 const person1 = new Person('Rohan', 28)
 console.log(person1.eat('burger'));
 console.log(person1);
 console.log(person1.poop());
 console.log(person1);
+console.log(person1.toString());
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -51,11 +55,40 @@ console.log(person1);
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+this.model = model;
+this.milesPerGallon = milesPerGallon;
+this.tank = 0;
+this.odometer = 0;
 }
 
+Car.prototype.fill = function(gallons) {
+  this.tank += gallons;
+return `I just filled the tank with ${gallons} gallons.`
+}
 
+Car.prototype.drive = function(distance) {
+  // let iRanOut = 0;
+//  for(Car key in car1) {
+  if((distance/this.milesPerGallon) >= this.tank) {
+    this.odometer += distance;
+    this.tank = 0
+    return `I ran out of fuel at ${this.odometer} miles!`
+  } else {
+  this.odometer += distance;
+  this.tank -= (distance/this.milesPerGallon);
+  //  if(this.tank = 0) {
+    // iRanOut += this.odometer
+    // }return `I ran out of fuel at ${iRanOut} miles!`
+  }}
+// }
+
+const car1 = new Car('Ford', 30)
+console.log(car1);
+console.log(car1.fill(100));
+console.log(car1);
+console.log(car1.drive(3002));
+console.log(car1);
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -64,18 +97,23 @@ function Car() {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
-
+function Baby(name, age, props,) {
+Person.call(this, name, age);
+this.favoriteToy = props.favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype);
+ 
+const baby1 = new Baby('zeek', 'whe', 'hey', 'hell')
 
+ console.log(baby1);
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global Scope -
+  2. Object;s Method -
+  3. .call / .apply -
+  4. .bind method -
 */
 
 ///////// END OF CHALLENGE /////////
